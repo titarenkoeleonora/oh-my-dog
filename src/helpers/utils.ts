@@ -1,4 +1,4 @@
-import { TPrediction } from "../types";
+import { TPrediction } from '../types';
 
 export const getUrlsFromPredictions = (predictions: TPrediction[]): string[] => {
   const urls = predictions.map((prediction) => {
@@ -21,10 +21,10 @@ export const validateFiles = (file: File) => {
   const limitImageSize = 5242880;
 
   if (!file.type.includes('image')) {
-    return "Hmmm. I don't understand this type of files. Please choose an image.";
+    return "Hmmm. We don't understand this type of files. Please choose an image.";
   };
 
   if (file.size > limitImageSize) {
-    return "Too large photo. Please choose a photo smaller than 5 megabytes.";
+    return 'Too large photo. Please choose a photo smaller than 5 megabytes.';
   }
 };

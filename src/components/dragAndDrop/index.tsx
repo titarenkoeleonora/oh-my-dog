@@ -1,10 +1,13 @@
-import { type } from "@testing-library/user-event/dist/type";
-import React, { FC, useContext, useRef, useState } from "react";
-import { AppContext } from "../../context/appProvider";
-import { validateFiles } from "../../helpers/utils";
-import { Container, Form, Input, Label, UploadButton } from "./styles";
+import React, { useContext, useRef, useState } from 'react';
+import { AppContext } from '../../context/appProvider';
+import { validateFiles } from '../../helpers/utils';
+import Error from '../shared/error';
+import { Container, Form, Input, Label, UploadButton } from './styles';
 
-const getUploadedImagePath = (setUploadedImage: (a: string) => void, setIsOpenModal: (a: boolean) => void, uploadedImage?: File) => {
+const getUploadedImagePath = (
+  setUploadedImage: (a: string) => void,
+  setIsOpenModal: (a: boolean) => void,
+  uploadedImage?: File) => {
   if (uploadedImage) {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -26,9 +29,9 @@ const DragAndDrop = () => {
   const onDrag = (evt: React.DragEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (evt.type === "dragenter" || evt.type === "dragover") {
+    if (evt.type === 'dragenter' || evt.type === 'dragover') {
       setDragActive(true);
-    } else if (evt.type === "dragleave") {
+    } else if (evt.type === 'dragleave') {
       setDragActive(false);
     }
   };
@@ -87,21 +90,29 @@ const DragAndDrop = () => {
         onSubmit={(evt: React.FormEvent) => evt.preventDefault()}
       >
         <Input
-          id="input-file-upload"
+          id='input-file-upload'
           ref={inputRef}
-          type="file"
-          accept="image/*"
-          onChange={onChange}
+          type='file'
+          accept='image/*'
+          onChange={(evt) => {
+            console.log('evt: ', evt);
+            onChange(evt)
+          }}
           required
         />
-        <Label htmlFor="input-file-upload">
+        <Label htmlFor='input-file-upload'>
           <p>Drag and drop your file here or</p>
           <UploadButton onClick={onButtonClick}>
             Upload a file
           </UploadButton>
         </Label>
       </Form>
-      {validationError && <p>{validationError}</p>}
+      {validationError && (
+        <Error type='validationError'>
+          {validationError}
+        </Error>
+      )
+        }
     </Container>
    
   );

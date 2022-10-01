@@ -1,16 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../context/appProvider";
-import Main from "../shared/main";
-import RadioButton from "../shared/radioButton";
-import ChosenPicture from "../chosenPicture";
-import Filter from "../Filter";
-import Loader from "../Loader";
-import PicturesList from "../PicturesList";
-import { Container, MainBlock } from "./styles";
-import { getPictures } from "../../api";
-import { AxiosResponse } from "axios";
-import Error from "../shared/error";
-import Button from "../shared/button";
+import { useCallback, useContext, useRef, useState } from 'react';
+import { AppContext } from '../../context/appProvider';
+import ChosenPicture from '../chosenPicture';
+import Filter from '../filter';
+import Loader from '../loader';
+import PicturesList from '../picturesList';
+import { Container, MainBlock } from './styles';
+import { getPictures } from '../../api';
+import { AxiosResponse } from 'axios';
+import Error from '../shared/error';
+import Button from '../shared/button';
 
 const ResultPage = () => {
   const {
@@ -30,16 +28,19 @@ const ResultPage = () => {
     setIsUploadedPageActive,
   } = useContext(AppContext);
 
-  const onFilterChange = async (index: number) => {
-    setIsUploadStarted(true);
-    setActiveFilterIndex(index);
+  const [isMorePicturesLoading, setIsMorePicturesLoading] = useState(false);
+
+  const observer = useRef<any>();
+
+  const getData = useCallback(async (index: number) => {
+    setIsMorePicturesLoading(true);
 
     const currentUrl = urls[index].toLowerCase()
 
     await getPictures({
       url: currentUrl,
       onSuccess: (data: AxiosResponse<{message: string[]}>['data']) => {
-        setPicturesList(data.message);
+        setPicturesList((prevPicturesList) => Array.from(new Set([...prevPicturesList, ...data.message])));
         setError('');
       },
       onError: (error) => {
@@ -52,18 +53,46 @@ const ResultPage = () => {
       },
       onFinally: () => {
         setIsUploadStarted(false);
+        setIsMorePicturesLoading(false);
       },
     });
+  }, [setError, setIsUploadStarted, urls, setPicturesList]);
+
+  const lastPictureElementRef = useCallback(
+    (node: any) => {
+      if (isMorePicturesLoading) return;
+
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver(async (entries) => {
+        if (entries[0].isIntersecting) {
+          console.log('visible');
+          await getData(activeFilterIndex);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [isMorePicturesLoading,activeFilterIndex, getData]
+  );
+
+  const onFilterChange = async (index: number) => {
+    setIsUploadStarted(true);
+    setActiveFilterIndex(index);
+    setPicturesList(() => []);
+    setIsMorePicturesLoading(true);
+
+    await getData(index);
   };
 
   const onTryAgainClick = () => {
     setIsUploadedPageActive(true);
     setUploadedImage(null);
     setActiveFilterIndex(0);
-    setPicturesList([]);
+    setPicturesList(() => []);
   };
 
-  if (isUploadStarted && !error) return <Loader />;
+  if (isUploadStarted) return <Loader />;
 
   if (uploadedImage && !isOpenModal) return (
     <Container>
@@ -83,8 +112,9 @@ const ResultPage = () => {
       </MainBlock>
       {error ? 
         <Error>{error}</Error>
-       : <PicturesList picturesList={picturesList} />
+       : <PicturesList picturesList={picturesList} lastPictureElementRef={lastPictureElementRef} />
       }
+      {isMorePicturesLoading && <Loader />}
     </Container>
   );
 

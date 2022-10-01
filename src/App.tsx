@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'styled-components';
-import DragAndDrop from './components/dragAndDrop';
-import Main from "./components/shared/main";
+import Main from './components/shared/main';
 import { AppProvider } from './context/appProvider';
 import { GlobalStyles } from './ui/theme'
 import { theme } from './ui/theme/theme';
 import UploadPage from './components/uploadPage';
 import ResultPage from './components/resultPage';
+import Header from './components/header';
 
 const App = () => {
   return (
@@ -13,6 +13,7 @@ const App = () => {
       <GlobalStyles />
       <AppProvider>
         <Main>
+          <Header />
           <UploadPage />
           <ResultPage />
         </Main>

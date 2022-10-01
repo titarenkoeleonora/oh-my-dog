@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 type TResponse = {
   message: string[]
@@ -11,7 +11,8 @@ type TInput = {
   onFinally?: () => void;
 }
 
-export const getPictures = ({ url, onSuccess, onError, onFinally }: TInput) => axios.get<TResponse>(`https://dog.ceo/api/breed${url}/images/random/9`)
+export const getPictures = ({ url, onSuccess, onError, onFinally }: TInput) => axios
+  .get<TResponse>(`https://dog.ceo/api/breed${url}/images/random/9`)
   .then((res: AxiosResponse<TResponse>) => {
     onSuccess?.(res.data);
   })

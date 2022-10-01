@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { Image } from "./styles";
+import { FC } from 'react';
+import { Image } from './styles';
 
 const ChosenPicture: FC<{uploadedImage: string}> = ({ uploadedImage }) => {
   return (

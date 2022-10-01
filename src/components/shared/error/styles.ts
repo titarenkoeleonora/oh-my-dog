@@ -1,4 +1,4 @@
-import { styled } from "../../../ui/theme";
+import { styled } from '../../../ui/theme';
 
 export const Container = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 200px;
+  width: 300px;
   height: auto;
 `;
 

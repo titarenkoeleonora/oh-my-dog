@@ -1,4 +1,4 @@
-import { Container, Image } from "./styles";
+import { Container, Image } from './styles';
 import loaderImage from '../../images/loader.gif';
 
 const Loader = () => {

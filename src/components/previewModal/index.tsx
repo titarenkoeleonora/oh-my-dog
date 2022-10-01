@@ -1,8 +1,7 @@
-import { FC, SyntheticEvent, useContext } from "react";
-import { AppContext } from "../../context/appProvider";
-import Button from "../shared/button";
-import Error from "../shared/error";
-import { Container, Dialogue, Footer, Image } from "./styles";
+import { FC, SyntheticEvent, useContext } from 'react';
+import { AppContext } from '../../context/appProvider';
+import Button from '../shared/button';
+import { Container, Dialogue, Footer, Image } from './styles';
 
 type Props = {
   onUpload: () => void,
@@ -32,7 +31,7 @@ const PreviewModal: FC<Props> = ({ onUpload }) => {
       <Dialogue
         onClick={(evt: SyntheticEvent<HTMLDivElement>) => evt.stopPropagation()}
       >
-        <Image src={uploadedImage} alt={"preview"} id='img' ref={imageRef} />
+        <Image src={uploadedImage} alt={'preview'} id='img' ref={imageRef} />
       <Footer>
         {<Button
             onClick={() => {

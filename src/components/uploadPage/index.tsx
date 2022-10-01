@@ -1,12 +1,12 @@
-import { useContext, useState } from "react";
-import { AppContext } from "../../context/appProvider";
-import DragAndDrop from "../dragAndDrop";
-import PreviewModal from "../previewModal";
-import * as mobilenet from "@tensorflow-models/mobilenet";
-import "@tensorflow/tfjs";
-import axios, { AxiosResponse } from "axios";
-import { getUrlsFromPredictions } from "../../helpers/utils";
-import { getPictures } from "../../api";
+import { useContext } from 'react';
+import { AppContext } from '../../context/appProvider';
+import DragAndDrop from '../dragAndDrop';
+import PreviewModal from '../previewModal';
+import * as mobilenet from '@tensorflow-models/mobilenet';
+import '@tensorflow/tfjs';
+import { AxiosResponse } from 'axios';
+import { getUrlsFromPredictions } from '../../helpers/utils';
+import { getPictures } from '../../api';
 
 const getBreedPrediction = async (img: HTMLImageElement) => {
   const model = await mobilenet.load();
@@ -45,7 +45,7 @@ const UploadPage = () => {
           url: currentUrl,
           onSuccess: (data: AxiosResponse<{message: string[]}>['data']) => {
             setIsUploadStarted(false);
-            setPicturesList(data.message);
+            setPicturesList(() => data.message);
           },
           onError: (error) => {
             if (error.response?.status === 404) {

@@ -18,7 +18,7 @@ type TState = {
   setIsUploadStarted: (isUploadStarted: boolean) => void,
   setPredictions: (predictions: TPrediction[]) => void,
   setActiveFilterIndex: (activeFilterIndex: number) => void,
-  setPicturesList: (picturesList: string[]) => void,
+  setPicturesList: (cb: (picturesList: string[]) => string[]) => void,
   setIsUploadedPageActive: (isUploadedPageActive: boolean) => void,
   setUrls: (urls: string[]) => void,
   setError: (error: string) => void,

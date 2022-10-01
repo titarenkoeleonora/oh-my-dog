@@ -1,21 +1,13 @@
-import { styled } from "../../ui/theme";
+import { styled } from '../../ui/theme';
 
 export const List = styled.ul`
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
   list-style: none;
-  /* overflow-y: auto; */
-
-  @media screen and (max-width: ${({theme}) => theme.breakpoints.desktop}) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media screen and (max-width: ${({theme}) => theme.breakpoints.tablet}) {
-    grid-template-columns: 1fr;
-  }
 `;
 
 export const Picture = styled.img`
