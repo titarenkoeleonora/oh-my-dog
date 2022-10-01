@@ -1,9 +1,9 @@
 import { useCallback, useContext, useRef, useState } from 'react';
 import { AppContext } from '../../context/appProvider';
-import ChosenPicture from '../chosenPicture';
-import Filter from '../filter';
-import Loader from '../loader';
-import PicturesList from '../picturesList';
+import ChosenPicture from './chosenPicture';
+import Filter from './filter';
+import Loader from '../shared/loader';
+import PicturesList from './picturesList';
 import { Container, MainBlock } from './styles';
 import { getPictures } from '../../api';
 import { AxiosResponse } from 'axios';

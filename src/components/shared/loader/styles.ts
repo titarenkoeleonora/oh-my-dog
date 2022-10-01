@@ -1,11 +1,12 @@
-import { styled } from '../../ui/theme';
+import { styled } from '../../../ui/theme';
 
 export const Container = styled.div`
-  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 15px;
 `;
 
-export const Title = styled.p``;
+export const Image = styled.img`
+  
+`;

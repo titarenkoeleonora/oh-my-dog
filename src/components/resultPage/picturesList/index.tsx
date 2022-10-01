@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import Error from '../shared/error';
+import Error from '../../shared/error';
 import { List, Picture } from './styles';
 
 type TProps = {
@@ -20,7 +20,7 @@ const PicturesList: FC<TProps> = ({ picturesList, lastPictureElementRef }) => {
         if (picturesList.length === index + 1) {
           return (
             <li key={picture + index} ref={lastPictureElementRef}>
-              <Picture src={picture} />
+              <Picture src={picture} loading='lazy' />
             </li>
           );
         } else {

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { AppContext } from '../../context/appProvider';
-import DragAndDrop from '../dragAndDrop';
-import PreviewModal from '../previewModal';
+import DragAndDrop from './dragAndDrop';
+import PreviewModal from './previewModal';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import '@tensorflow/tfjs';
 import { AxiosResponse } from 'axios';

@@ -1,5 +1,5 @@
 import { Container, Image } from './styles';
-import loaderImage from '../../images/loader.gif';
+import loaderImage from '../../../images/loader.gif';
 
 const Loader = () => {
   return (

@@ -1,6 +1,6 @@
 import { FC, SyntheticEvent, useContext } from 'react';
-import { AppContext } from '../../context/appProvider';
-import Button from '../shared/button';
+import { AppContext } from '../../../context/appProvider';
+import Button from '../../shared/button';
 import { Container, Dialogue, Footer, Image } from './styles';
 
 type Props = {

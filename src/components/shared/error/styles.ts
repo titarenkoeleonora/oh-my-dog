@@ -12,7 +12,3 @@ export const Image = styled.img`
   width: 300px;
   height: auto;
 `;
-
-export const Text = styled.p`
-
-`;

@@ -1,4 +1,4 @@
-import { styled } from '../../ui/theme';
+import { styled } from '../../../ui/theme';
 
 export const Container = styled.div`
   position: fixed;

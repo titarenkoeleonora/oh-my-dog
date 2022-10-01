@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Container, Image, Text } from './styles';
+import { Container, Image } from './styles';
 import pugBread from '../../../images/pug-bread.png'
 import pugQuestions from '../../../images/pug-questions.png'
 
@@ -24,9 +24,9 @@ const Error: FC<TProps> = ({ children, type = 'serverError' }) => {
   return (
     <Container>
       <Image src={getImage(type)} />
-      <Text>
+      <p>
         {children}
-      </Text>
+      </p>
     </Container>
   );
 };

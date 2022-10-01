@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
-import { AppContext } from '../../context/appProvider';
-import { validateFiles } from '../../helpers/utils';
-import Error from '../shared/error';
+import { AppContext } from '../../../context/appProvider';
+import { validateFiles } from '../../../helpers/utils';
+import Error from '../../shared/error';
 import { Container, Form, Input, Label, UploadButton } from './styles';
 
 const getUploadedImagePath = (
@@ -94,10 +94,7 @@ const DragAndDrop = () => {
           ref={inputRef}
           type='file'
           accept='image/*'
-          onChange={(evt) => {
-            console.log('evt: ', evt);
-            onChange(evt)
-          }}
+          onChange={onChange}
           required
         />
         <Label htmlFor='input-file-upload'>

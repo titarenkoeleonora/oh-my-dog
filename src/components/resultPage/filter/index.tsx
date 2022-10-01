@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import RadioButton from '../shared/radioButton';
-import { TPrediction } from '../../types';
-import { Container, Title } from './styles';
+import RadioButton from '../../shared/radioButton';
+import { TPrediction } from '../../../types';
+import { Container } from './styles';
 
 type TProps = {
   predictions: TPrediction[];
@@ -14,9 +14,9 @@ const Filter: FC<TProps> = ({ predictions, activeFilterIndex, setActiveFilterInd
 
  return (
   <Container>
-    <Title>
-      We think that it's:
-    </Title>
+    <p>
+      We think it's:
+    </p>
     {predictions.map(({ className, probability }, index) => (
       <RadioButton
         value={className}
