@@ -2,7 +2,7 @@
 <p>
 </p>
 
-> A funny single-page application using typescript where users can upload a picture of a dog and see a gallery of pictures of dogs of the same breed.
+> A funny single-page application where users can upload a picture of a dog and see a gallery of pictures of dogs of the same breed.
 
 ## What's done
 
