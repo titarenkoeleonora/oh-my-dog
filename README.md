@@ -19,11 +19,11 @@
 
 As a bonus :
 
-- [x] App testing with Jest and react-testing-library allows to test the app from user side and accessibility
+- [x] App testing with Jest and react-testing-library allows testing the app from a user side and accessibility
 - [x] React context to avoid props drilling. It was decided not to overload the application with redax and other libraries
-- [x] Style-components to separate business logic from render logic
+- [x] Style-components to separate business logic from rendering logic
 - [x] App deployed to Vercel
-- [x] ESlint and prettier for automatic code formatting and matching it to best practice and code style
+- [x] ESlint and prettier for automatic code formatting and matching it to best practices and code style
 - [x] Responsive layout
 
 ## Available Scripts

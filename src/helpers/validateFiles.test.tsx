@@ -8,7 +8,7 @@ describe('validateFiles', () => {
       type: 'document',
     };
     const nonImageFileError =
-      'Hmmm. We don&apos;t understand this type of files. Please choose an image.';
+      "Hmmm. We don't understand this type of files. Please choose an image.";
 
     expect(validateFiles(file as File)).toBe(nonImageFileError);
   });

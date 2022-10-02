@@ -2,7 +2,7 @@ import { MAX_IMAGE_SIZE } from './constants';
 
 export const validateFiles = (file: File): string => {
   if (!file.type.includes('image')) {
-    return 'Hmmm. We don&apos;t understand this type of files. Please choose an image.';
+    return "Hmmm. We don't understand this type of files. Please choose an image.";
   }
 
   if (file.size > MAX_IMAGE_SIZE) {
