@@ -4,6 +4,10 @@
 
 > A funny single-page application where users can upload a picture of a dog and see a gallery of pictures of dogs of the same breed.
 
+### 🏠 [Homepage](https://github.com/titarenkoeleonora/oh-my-dog)
+
+### ✨ [Demo](https://oh-my-dog.vercel.app/)
+
 ## What's done
 
 - [x] The app should allow users to upload a picture and see it in a preview
