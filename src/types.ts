@@ -1,4 +1,4 @@
 export interface Prediction {
-  className: string,
-  probability: number,
-};
+  className: string;
+  probability: number;
+}

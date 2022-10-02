@@ -1,4 +1,5 @@
-export const badRequestCode = 404;
+export const NOT_FOUND_CODE = 404;
+export const MAX_IMAGE_SIZE = 5_242_880;
 
 export const eventTypes = {
   dragEnter: 'dragenter',
