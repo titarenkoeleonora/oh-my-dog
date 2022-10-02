@@ -1,15 +1,16 @@
 import React from 'react';
-
 import { ThemeProvider } from 'styled-components';
-import { Main } from './components/shared/main';
-import { AppProvider } from './context/app-provider';
-import { GlobalStyles } from './ui/theme'
-import { theme } from './ui/theme/theme';
-import { UploadPage } from './components/uploadPage';
-import { Header } from './components/shared/header';
 
-const ResultPage = React.lazy(() => import('./components/resultPage')
-  .then(module=>({ default: module.ResultPage })));
+import { Main } from './components/shared/Main/Main';
+import { PageTitle } from './components/shared/PageTitle/PageTitle';
+import { UploadPage } from './components/UploadPage/UploadPage';
+import { AppProvider } from './context/AppContext';
+import { GlobalStyles } from './ui/styles';
+import { theme } from './ui/styles/theme';
+
+const ResultPage = React.lazy(() =>
+  import('./components/ResultPage/ResultPage').then((module) => ({ default: module.ResultPage })),
+);
 
 export const App = () => {
   return (
@@ -17,11 +18,11 @@ export const App = () => {
       <GlobalStyles />
       <AppProvider>
         <Main>
-          <Header />
+          <PageTitle />
           <UploadPage />
           <ResultPage />
         </Main>
       </AppProvider>
     </ThemeProvider>
   );
-}
+};
