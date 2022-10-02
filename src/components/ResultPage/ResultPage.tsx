@@ -3,7 +3,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import { getPictures } from '../../api/getPictures';
 import { AppContext } from '../../context/AppContext';
-import { getUrlsFromPredictions } from '../../helpers/utils';
+import { getUrlsFromPredictions } from '../../helpers/getUrlsFromPredictions';
 import { Button } from '../shared/Button/Button';
 import { Error } from '../shared/Error/Error';
 import { Image } from '../shared/Image/Image';

@@ -21,9 +21,13 @@ const getImage = (type: string): string => {
   }
 };
 
-export const Error: FC<ErrorProps> = ({ children, type = 'serverError' }): JSX.Element => (
-  <Container>
-    <Image src={getImage(type)} />
-    <p>{children}</p>
-  </Container>
-);
+export const Error: FC<ErrorProps> = ({ children, type = 'serverError' }): JSX.Element => {
+  const imageAlt = type === 'validationError' ? 'Validation Error' : 'Server Error';
+
+  return (
+    <Container>
+      <Image src={getImage(type)} alt={imageAlt} />
+      <p>{children}</p>
+    </Container>
+  );
+};
