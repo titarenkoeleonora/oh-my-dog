@@ -89,7 +89,6 @@ export const DragAndDrop: FC<DragAndDropProps> = ({ openModal }): JSX.Element =>
           type="file"
           accept="image/*"
           onChange={onChange}
-          required
         />
         <Label htmlFor="input-file-upload">
           <p>Drag and drop your file here or</p>
