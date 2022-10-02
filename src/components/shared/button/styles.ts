@@ -19,14 +19,14 @@ const colors: Record<TVariant, { background: string, border: string, text: strin
 
 export const ButtonWrapper = styled.button<{ variant: TVariant }>`
   padding: 5px 20px;
-  background-color: ${({ variant }) => colors[variant].background};
-  border: 1px solid ${({ variant }) => colors[variant].border};
-  color: ${({ variant }) => colors[variant].text};
+  background-color: ${({ variant }): string => colors[variant].background};
+  border: 1px solid ${({ variant }): string => colors[variant].border};
+  color: ${({ variant }): string => colors[variant].text};
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 10px;
 
   &:hover {
-    background-color: ${({ variant }) => colors[variant].hoverBg};
+    background-color: ${({ variant }): string => colors[variant].hoverBg};
   }
 `;

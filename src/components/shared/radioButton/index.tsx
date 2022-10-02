@@ -1,7 +1,8 @@
 import { FC, ReactNode } from 'react';
+
 import { Input, Label } from './styles';
 
-type TProps = {
+interface Props {
   children: ReactNode;
   value: string;
   isActive?: boolean;
@@ -9,7 +10,7 @@ type TProps = {
   onChange: () => void;
 };
 
-const RadioButton: FC<TProps> = ({ children, value, isActive, name, onChange }) => {
+export const RadioButton: FC<Props> = ({ children, value, isActive, name, onChange }): JSX.Element => {
   const id = `radio_${value}`;
 
   return (
@@ -19,8 +20,5 @@ const RadioButton: FC<TProps> = ({ children, value, isActive, name, onChange }) 
         {children}
       </Label>
     </>
-    
   );
  };
- 
- export default RadioButton;

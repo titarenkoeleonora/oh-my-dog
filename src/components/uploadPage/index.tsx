@@ -1,14 +1,17 @@
 import { useContext } from 'react';
-import { AppContext } from '../../context/appProvider';
-import DragAndDrop from './dragAndDrop';
-import PreviewModal from './previewModal';
+
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import '@tensorflow/tfjs';
 import { AxiosResponse } from 'axios';
-import { getUrlsFromPredictions } from '../../helpers/utils';
-import { getPictures } from '../../api';
 
-const getBreedPrediction = async (img: HTMLImageElement) => {
+import { AppContext } from '../../context/app-provider';
+import { getPictures } from '../../api';
+import { DragAndDrop } from './dragAndDrop';
+import { PreviewModal } from './previewModal';
+import { getUrlsFromPredictions } from '../../helpers/utils';
+import { Prediction } from '../../types';
+
+const getBreedPrediction = async (img: HTMLImageElement): Promise<Prediction[]> => {
   const model = await mobilenet.load();
 
   const predictions = await model.classify(img);
@@ -17,11 +20,11 @@ const getBreedPrediction = async (img: HTMLImageElement) => {
   return predictions;
 };
 
-const UploadPage = () => {
+export const UploadPage = (): JSX.Element | null => {
   const {
     isOpenModal,
     imageRef,
-    setPredictions, 
+    setPredictions,
     activeFilterIndex,
     setPicturesList,
     setIsUploadStarted,
@@ -30,7 +33,7 @@ const UploadPage = () => {
     setError,
   } = useContext(AppContext);
 
-  const onUpload = async () => {
+  const onUpload = async (): Promise<void> => {
     if (imageRef?.current) {
       const predictions = await getBreedPrediction(imageRef.current);
       setPredictions(predictions);
@@ -70,5 +73,3 @@ const UploadPage = () => {
     </>
   );
 };
-
-export default UploadPage;

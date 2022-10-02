@@ -1,13 +1,14 @@
 import React, { useContext, useRef, useState } from 'react';
-import { AppContext } from '../../../context/appProvider';
+
+import { AppContext } from '../../../context/app-provider';
 import { validateFiles } from '../../../helpers/utils';
-import Error from '../../shared/error';
+import { Error } from '../../shared/error';
 import { Container, Form, Input, Label, UploadButton } from './styles';
 
 const getUploadedImagePath = (
   setUploadedImage: (a: string) => void,
   setIsOpenModal: (a: boolean) => void,
-  uploadedImage?: File) => {
+  uploadedImage?: File): void => {
   if (uploadedImage) {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -18,15 +19,15 @@ const getUploadedImagePath = (
   }
 };
 
-const DragAndDrop = () => {
+export const DragAndDrop = (): JSX.Element => {
   const [dragActive, setDragActive] = useState(false);
   const [validationError, setValidationError] = useState('');
-  
+
   const { setUploadedImage, setIsOpenModal } = useContext(AppContext);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const onDrag = (evt: React.DragEvent<HTMLFormElement>) => {
+  const onDrag = (evt: React.DragEvent<HTMLFormElement>): void => {
     evt.preventDefault();
 
     if (evt.type === 'dragenter' || evt.type === 'dragover') {
@@ -36,7 +37,7 @@ const DragAndDrop = () => {
     }
   };
 
-  const onDrop = (evt: React.DragEvent<HTMLFormElement>) => {
+  const onDrop = (evt: React.DragEvent<HTMLFormElement>): void => {
     evt.preventDefault();
 
     const file = evt.dataTransfer.files?.[0];
@@ -54,7 +55,7 @@ const DragAndDrop = () => {
       }
   };
 
-  const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     evt.preventDefault();
 
     const file = evt.target.files?.[0]
@@ -73,7 +74,7 @@ const DragAndDrop = () => {
     }
   };
 
-  const onButtonClick = () => {
+  const onButtonClick = (): void => {
     if (inputRef.current) {
       inputRef.current.click();
     }
@@ -111,8 +112,5 @@ const DragAndDrop = () => {
       )
         }
     </Container>
-   
   );
 };
-
-export default DragAndDrop;

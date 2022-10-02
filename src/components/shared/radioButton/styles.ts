@@ -13,12 +13,13 @@ export const Label = styled.label`
     content: '';
     position: relative;
     display: flex;
+    flex-shrink: 0;
     width: 25px;
     height: 25px;
     margin-right: 15px;
-    border: 2px solid ${({ theme }) => theme.colors.grey};
+    border: 2px solid ${({ theme }): string => theme.colors.grey};
     border-radius: 50%;
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }): string => theme.colors.white};
   }
 `;
 

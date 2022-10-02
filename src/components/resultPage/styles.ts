@@ -13,7 +13,7 @@ export const MainBlock = styled.div`
   align-items: center;
   gap: 30px;
 
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+  @media screen and (max-width: ${({ theme }): string => theme.breakpoints.tablet}) {
     flex-direction: column;
   }
 `;

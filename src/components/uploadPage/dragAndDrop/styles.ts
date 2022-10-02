@@ -14,11 +14,11 @@ export const Form = styled.form<{dragActive: boolean}>`
   width: 450px;
   height: 250px;
   text-align: center;
-  background-color: ${({ theme, dragActive }) => dragActive ? theme.colors.white : theme.colors.lightBlue};
-  border: 2px dashed ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme, dragActive }): string => dragActive ? theme.colors.white : theme.colors.lightBlue};
+  border: 2px dashed ${({ theme }): string => theme.colors.blue};
   border-radius: 10px;
 
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+  @media screen and (max-width: ${({ theme }): string => theme.breakpoints.tablet}) {
     width: 100%;
   }
 `;

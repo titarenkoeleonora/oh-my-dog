@@ -1,16 +1,17 @@
 import { FC } from 'react';
-import RadioButton from '../../shared/radioButton';
-import { TPrediction } from '../../../types';
+
+import { RadioButton } from '../../shared/radioButton';
+import { Prediction } from '../../../types';
 import { Container } from './styles';
 
-type TProps = {
-  predictions: TPrediction[];
+interface Props {
+  predictions: Prediction[];
   activeFilterIndex: number;
   setActiveFilterIndex: (a: number) => void;
   onFilterChange: (index: number) => void;
 }
 
-const Filter: FC<TProps> = ({ predictions, activeFilterIndex, setActiveFilterIndex, onFilterChange }) => {
+export const Filter: FC<Props> = ({ predictions, activeFilterIndex, onFilterChange }): JSX.Element => {
 
  return (
   <Container>
@@ -25,11 +26,9 @@ const Filter: FC<TProps> = ({ predictions, activeFilterIndex, setActiveFilterInd
         isActive={activeFilterIndex === index}
         onChange={() => onFilterChange(index)}
       >
-        {Math.floor(probability * 100)}% probability {className} 
+        {Math.floor(probability * 100)}% probability {className}
       </RadioButton>
     ))}
   </Container>
  );
 };
-
-export default Filter;

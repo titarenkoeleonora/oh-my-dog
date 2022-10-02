@@ -1,11 +1,9 @@
 import { Container } from './styles'
 
-const Header = () => {
+export const Header = (): JSX.Element => {
   return (
     <Container>
       Oh my Dog!
     </Container>
   );
 };
-
-export default Header;

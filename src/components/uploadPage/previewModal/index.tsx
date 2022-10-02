@@ -1,13 +1,14 @@
 import { FC, SyntheticEvent, useContext } from 'react';
-import { AppContext } from '../../../context/appProvider';
-import Button from '../../shared/button';
+
+import { AppContext } from '../../../context/app-provider';
+import { Button } from '../../shared/button';
 import { Container, Dialogue, Footer, Image } from './styles';
 
 type Props = {
   onUpload: () => void,
 }
 
-const PreviewModal: FC<Props> = ({ onUpload }) => {
+export const PreviewModal: FC<Props> = ({ onUpload }): JSX.Element | null => {
   const {
     uploadedImage,
     setUploadedImage,
@@ -17,7 +18,7 @@ const PreviewModal: FC<Props> = ({ onUpload }) => {
     setIsUploadedPageActive
   } = useContext(AppContext);
 
-  const onModalCLose = (evt: SyntheticEvent<HTMLDivElement | HTMLButtonElement>) => {
+  const onModalCLose = (evt: SyntheticEvent<HTMLDivElement | HTMLButtonElement>): void => {
     evt.preventDefault();
     evt.stopPropagation();
     setIsOpenModal(false);
@@ -29,12 +30,12 @@ const PreviewModal: FC<Props> = ({ onUpload }) => {
   return (
     <Container onClick={onModalCLose}>
       <Dialogue
-        onClick={(evt: SyntheticEvent<HTMLDivElement>) => evt.stopPropagation()}
+        onClick={(evt: SyntheticEvent<HTMLDivElement>): void => evt.stopPropagation()}
       >
         <Image src={uploadedImage} alt={'preview'} id='img' ref={imageRef} />
       <Footer>
         {<Button
-            onClick={() => {
+            onClick={(): void => {
               setIsUploadStarted(true);
               setIsOpenModal(false);
               onUpload();
@@ -55,5 +56,3 @@ const PreviewModal: FC<Props> = ({ onUpload }) => {
     </Container>
   );
 };
-
-export default PreviewModal;

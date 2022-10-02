@@ -24,8 +24,13 @@ export const Dialogue = styled.div`
   width: 600px;
   height: 600px;
   background-color: #f8fafc;
-  border: 2px solid ${({ theme }) => theme.colors.blue};
+  border: 2px solid ${({ theme }): string => theme.colors.blue};
   border-radius: 1rem;
+
+  @media screen and (max-width: ${({ theme }): string => theme.breakpoints.tablet}) {
+    width: calc(100% - 40px);
+    height: 450px;
+  }
 `;
 
 export const Image = styled.img`
@@ -42,5 +47,6 @@ export const Footer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 300px;
+  gap: 30px;
+  flex-wrap: wrap;
 `;

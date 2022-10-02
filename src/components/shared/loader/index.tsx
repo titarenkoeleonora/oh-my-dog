@@ -1,13 +1,12 @@
-import { Container, Image } from './styles';
 import loaderImage from '../../../images/loader.gif';
 
-const Loader = () => {
+import { Container, Image } from './styles';
+
+export const Loader = (): JSX.Element => {
   return (
     <Container>
       <Image src={loaderImage} />
       Loading...
     </Container>
-  ); 
+  );
 };
-
-export default Loader;

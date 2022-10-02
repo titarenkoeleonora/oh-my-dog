@@ -1,4 +1,4 @@
-export type TPrediction = {
+export interface Prediction {
   className: string;
   probability: number;
 };

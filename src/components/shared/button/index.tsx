@@ -1,20 +1,19 @@
 import { FC, ReactNode, SyntheticEvent } from 'react';
+
 import { ButtonWrapper } from './styles';
 
-type TVariant = 'primary' | 'secondary';
+type Variant = 'primary' | 'secondary';
 
-type TProps = {
+interface Props {
   children: ReactNode;
-  variant?: TVariant,
+  variant?: Variant,
   onClick: (evt: SyntheticEvent<HTMLButtonElement>) => void;
 };
 
-const Button: FC<TProps> = ({ children, variant = 'primary', onClick }) => {
+export const Button: FC<Props> = ({ children, variant = 'primary', onClick }): JSX.Element => {
   return (
     <ButtonWrapper variant={variant} onClick={onClick}>
       {children}
     </ButtonWrapper>
   )
 };
-
-export default Button;

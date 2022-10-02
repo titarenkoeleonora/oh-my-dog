@@ -1,14 +1,16 @@
 import { FC } from 'react';
-import Error from '../../shared/error';
+
+import { Error } from '../../shared/error';
 import { List, Picture } from './styles';
 
-type TProps = {
+interface Props {
   picturesList: string[];
   lastPictureElementRef: any,
+  isMorePicturesLoading: boolean,
 };
 
-const PicturesList: FC<TProps> = ({ picturesList, lastPictureElementRef }) => {
-  if (!picturesList.length) return (
+export const PicturesList: FC<Props> = ({ picturesList, lastPictureElementRef, isMorePicturesLoading }): JSX.Element => {
+  if (!picturesList.length && !isMorePicturesLoading) return (
     <Error>
       Ooops... it seems like we don't have any photos. Maybe you want to choose another option or photo?
     </Error>
@@ -34,5 +36,3 @@ const PicturesList: FC<TProps> = ({ picturesList, lastPictureElementRef }) => {
     </List>
   );
 };
-
-export default PicturesList;

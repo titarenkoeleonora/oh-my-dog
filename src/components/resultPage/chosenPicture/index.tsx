@@ -1,10 +1,9 @@
 import { FC } from 'react';
+
 import { Image } from './styles';
 
-const ChosenPicture: FC<{uploadedImage: string}> = ({ uploadedImage }) => {
+export const ChosenPicture: FC<{uploadedImage: string}> = ({ uploadedImage }): JSX.Element => {
   return (
     <Image src={uploadedImage} alt='' />
   );
 };
-
-export default ChosenPicture;

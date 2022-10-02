@@ -1,16 +1,17 @@
 import { useCallback, useContext, useRef, useState } from 'react';
-import { AppContext } from '../../context/appProvider';
-import ChosenPicture from './chosenPicture';
-import Filter from './filter';
-import Loader from '../shared/loader';
-import PicturesList from './picturesList';
-import { Container, MainBlock } from './styles';
-import { getPictures } from '../../api';
-import { AxiosResponse } from 'axios';
-import Error from '../shared/error';
-import Button from '../shared/button';
 
-const ResultPage = () => {
+import { AxiosResponse } from 'axios';
+import { getPictures } from '../../api';
+import { AppContext } from '../../context/app-provider';
+import { ChosenPicture } from './chosenPicture';
+import { Filter } from './filter';
+import { Loader } from '../shared/loader';
+import { PicturesList } from './picturesList';
+import { Error } from '../shared/error';
+import { Button } from '../shared/button';
+import { Container, MainBlock } from './styles';
+
+export const ResultPage = (): JSX.Element | null => {
   const {
     uploadedImage,
     setUploadedImage,
@@ -27,12 +28,11 @@ const ResultPage = () => {
     setError,
     setIsUploadedPageActive,
   } = useContext(AppContext);
-
   const [isMorePicturesLoading, setIsMorePicturesLoading] = useState(false);
 
   const observer = useRef<any>();
 
-  const getData = useCallback(async (index: number) => {
+  const getData = useCallback(async (index: number): Promise<void> => {
     setIsMorePicturesLoading(true);
 
     const currentUrl = urls[index].toLowerCase()
@@ -66,30 +66,31 @@ const ResultPage = () => {
 
       observer.current = new IntersectionObserver(async (entries) => {
         if (entries[0].isIntersecting) {
-          console.log('visible');
           await getData(activeFilterIndex);
         }
       });
 
       if (node) observer.current.observe(node);
     },
-    [isMorePicturesLoading,activeFilterIndex, getData]
+    [isMorePicturesLoading, activeFilterIndex, getData]
   );
 
-  const onFilterChange = async (index: number) => {
-    setIsUploadStarted(true);
+  const onFilterChange = async (index: number): Promise<void> => {
+    // setIsUploadStarted(true);
     setActiveFilterIndex(index);
     setPicturesList(() => []);
     setIsMorePicturesLoading(true);
+    setError('');
 
     await getData(index);
   };
 
-  const onTryAgainClick = () => {
+  const onTryAgainClick = (): void => {
     setIsUploadedPageActive(true);
     setUploadedImage(null);
     setActiveFilterIndex(0);
     setPicturesList(() => []);
+    setError('');
   };
 
   if (isUploadStarted) return <Loader />;
@@ -110,9 +111,9 @@ const ResultPage = () => {
           </Button>
         </div>
       </MainBlock>
-      {error ? 
+      {error ?
         <Error>{error}</Error>
-       : <PicturesList picturesList={picturesList} lastPictureElementRef={lastPictureElementRef} />
+       : <PicturesList picturesList={picturesList} lastPictureElementRef={lastPictureElementRef} isMorePicturesLoading={isMorePicturesLoading} />
       }
       {isMorePicturesLoading && <Loader />}
     </Container>
@@ -120,5 +121,3 @@ const ResultPage = () => {
 
   return null;
 };
-
-export default ResultPage;
