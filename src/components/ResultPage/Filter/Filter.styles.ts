@@ -6,4 +6,5 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 15px;
+  font-weight: 600;
 `;

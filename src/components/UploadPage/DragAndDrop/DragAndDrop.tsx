@@ -2,7 +2,8 @@ import React, { FC, useContext, useRef, useState } from 'react';
 
 import { AppContext } from '../../../context/AppContext';
 import { eventTypes } from '../../../helpers/constants';
-import { getUploadedImagePath, validateFiles } from '../../../helpers/utils';
+import { getUploadedImagePath } from '../../../helpers/getUploadedImagePath';
+import { validateFiles } from '../../../helpers/validateFiles';
 import { Error } from '../../shared/Error/Error';
 import { Container, Form, Input, Label, UploadButton } from './DragAndDrop.styles';
 
