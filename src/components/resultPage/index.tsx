@@ -31,7 +31,7 @@ export const ResultPage = (): JSX.Element | null => {
 
   const [isMorePicturesLoading, setIsMorePicturesLoading] = useState(false);
 
-  const observer = useRef<any>();
+  const observer = useRef<any>(); //!TODO
 
   const getData = useCallback(async (index: number): Promise<void> => {
     setIsMorePicturesLoading(true);
@@ -52,7 +52,7 @@ export const ResultPage = (): JSX.Element | null => {
   }, [setError, setIsUploadStarted, urls, setPicturesList]);
 
   const lastPictureElementRef = useCallback(
-    (node: any) => {
+    (node: any) => { //!TODO
       if (isMorePicturesLoading) return;
 
       if (observer.current) observer.current.disconnect();

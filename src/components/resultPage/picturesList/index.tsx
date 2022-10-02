@@ -5,7 +5,7 @@ import { List, Picture } from './styles';
 
 interface Properties {
   picturesList: string[],
-  lastPictureElementRef: any,
+  lastPictureElementRef: any, //!TODO
   isMorePicturesLoading: boolean,
 };
 

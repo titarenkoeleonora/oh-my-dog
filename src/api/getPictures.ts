@@ -18,7 +18,7 @@ export const getPictures = ({ url, onSuccess, setError, onFinally }: Input) => a
     onSuccess?.(res.data);
     setError('');
   })
-  .catch((err: AxiosError<any>) => {
+  .catch((err: AxiosError<any>) => { //!TODO
     if (err.response?.status === badRequestCode) {
       setError(err.response.data.message);
     } else {
