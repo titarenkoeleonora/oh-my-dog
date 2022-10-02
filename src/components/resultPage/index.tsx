@@ -28,6 +28,7 @@ export const ResultPage = (): JSX.Element | null => {
     setError,
     setIsUploadedPageActive,
   } = useContext(AppContext);
+
   const [isMorePicturesLoading, setIsMorePicturesLoading] = useState(false);
 
   const observer = useRef<any>();
@@ -39,19 +40,11 @@ export const ResultPage = (): JSX.Element | null => {
 
     await getPictures({
       url: currentUrl,
-      onSuccess: (data: AxiosResponse<{message: string[]}>['data']) => {
+      onSuccess: (data: AxiosResponse<{message: string[]}>['data']): void => {
         setPicturesList((prevPicturesList) => Array.from(new Set([...prevPicturesList, ...data.message])));
-        setError('');
       },
-      onError: (error) => {
-        if (error.response?.status === 404) {
-          // setError(error.response.data.message);
-          setError(error.message);
-        } else {
-          setError('Ooops...Something went wrong D:');
-        }
-      },
-      onFinally: () => {
+      setError,
+      onFinally: (): void => {
         setIsUploadStarted(false);
         setIsMorePicturesLoading(false);
       },
@@ -76,10 +69,9 @@ export const ResultPage = (): JSX.Element | null => {
   );
 
   const onFilterChange = async (index: number): Promise<void> => {
-    // setIsUploadStarted(true);
     setActiveFilterIndex(index);
-    setPicturesList(() => []);
     setIsMorePicturesLoading(true);
+    setPicturesList(() => []);
     setError('');
 
     await getData(index);
@@ -95,29 +87,31 @@ export const ResultPage = (): JSX.Element | null => {
 
   if (isUploadStarted) return <Loader />;
 
-  if (uploadedImage && !isOpenModal) return (
-    <Container>
-      <MainBlock>
-        <ChosenPicture uploadedImage={uploadedImage} />
-        <div>
-          <Filter
-            predictions={predictions}
-            activeFilterIndex={activeFilterIndex}
-            setActiveFilterIndex={setActiveFilterIndex}
-            onFilterChange={onFilterChange}
-          />
-          <Button onClick={onTryAgainClick}>
-            Try again!
-          </Button>
-        </div>
-      </MainBlock>
-      {error ?
-        <Error>{error}</Error>
-       : <PicturesList picturesList={picturesList} lastPictureElementRef={lastPictureElementRef} isMorePicturesLoading={isMorePicturesLoading} />
-      }
-      {isMorePicturesLoading && <Loader />}
-    </Container>
+  return (
+    <>
+      {uploadedImage && !isOpenModal && (
+        <Container>
+          <MainBlock>
+            <ChosenPicture uploadedImage={uploadedImage} text={predictions?.[0]?.className} />
+            <div>
+              <Filter
+                predictions={predictions}
+                activeFilterIndex={activeFilterIndex}
+                setActiveFilterIndex={setActiveFilterIndex}
+                onFilterChange={onFilterChange}
+              />
+              <Button onClick={onTryAgainClick}>
+                Try again!
+              </Button>
+            </div>
+          </MainBlock>
+          {error ?
+            <Error>{error}</Error>
+          : <PicturesList picturesList={picturesList} lastPictureElementRef={lastPictureElementRef} isMorePicturesLoading={isMorePicturesLoading} />
+          }
+          {isMorePicturesLoading && <Loader />}
+        </Container>
+      )}
+    </>
   );
-
-  return null;
 };

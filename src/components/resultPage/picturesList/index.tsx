@@ -3,13 +3,13 @@ import { FC } from 'react';
 import { Error } from '../../shared/error';
 import { List, Picture } from './styles';
 
-interface Props {
-  picturesList: string[];
+interface Properties {
+  picturesList: string[],
   lastPictureElementRef: any,
   isMorePicturesLoading: boolean,
 };
 
-export const PicturesList: FC<Props> = ({ picturesList, lastPictureElementRef, isMorePicturesLoading }): JSX.Element => {
+export const PicturesList: FC<Properties> = ({ picturesList, lastPictureElementRef, isMorePicturesLoading }): JSX.Element => {
   if (!picturesList.length && !isMorePicturesLoading) return (
     <Error>
       Ooops... it seems like we don't have any photos. Maybe you want to choose another option or photo?

@@ -4,7 +4,7 @@ import pugBread from '../../../images/pug-bread.png'
 import pugQuestions from '../../../images/pug-questions.png'
 import { Container, Image } from './styles';
 
-interface Props {
+interface Properties {
   children: ReactNode,
   type?: string,
 };
@@ -21,13 +21,11 @@ const getImage = (type: string): string => {
   }
 };
 
-export const Error: FC<Props> = ({ children, type = 'serverError' }): JSX.Element => {
-  return (
-    <Container>
-      <Image src={getImage(type)} />
-      <p>
-        {children}
-      </p>
-    </Container>
-  );
-};
+export const Error: FC<Properties> = ({ children, type = 'serverError' }): JSX.Element => (
+  <Container>
+    <Image src={getImage(type)} />
+    <p>
+      {children}
+    </p>
+  </Container>
+);

@@ -2,15 +2,15 @@ import { FC, ReactNode } from 'react';
 
 import { Input, Label } from './styles';
 
-interface Props {
-  children: ReactNode;
-  value: string;
-  isActive?: boolean;
-  name: string;
-  onChange: () => void;
+interface Properties {
+  children: ReactNode,
+  value: string,
+  isActive?: boolean,
+  name: string,
+  onChange: () => void,
 };
 
-export const RadioButton: FC<Props> = ({ children, value, isActive, name, onChange }): JSX.Element => {
+export const RadioButton: FC<Properties> = ({ children, value, isActive, name, onChange }): JSX.Element => {
   const id = `radio_${value}`;
 
   return (

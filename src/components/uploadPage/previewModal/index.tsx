@@ -4,11 +4,11 @@ import { AppContext } from '../../../context/app-provider';
 import { Button } from '../../shared/button';
 import { Container, Dialogue, Footer, Image } from './styles';
 
-type Props = {
+type Properties = {
   onUpload: () => void,
-}
+};
 
-export const PreviewModal: FC<Props> = ({ onUpload }): JSX.Element | null => {
+export const PreviewModal: FC<Properties> = ({ onUpload }): JSX.Element | null => {
   const {
     uploadedImage,
     setUploadedImage,
@@ -25,34 +25,36 @@ export const PreviewModal: FC<Props> = ({ onUpload }): JSX.Element | null => {
     setUploadedImage(null);
   };
 
-  if (!uploadedImage) return null;
-
   return (
-    <Container onClick={onModalCLose}>
-      <Dialogue
-        onClick={(evt: SyntheticEvent<HTMLDivElement>): void => evt.stopPropagation()}
-      >
-        <Image src={uploadedImage} alt={'preview'} id='img' ref={imageRef} />
-      <Footer>
-        {<Button
-            onClick={(): void => {
-              setIsUploadStarted(true);
-              setIsOpenModal(false);
-              onUpload();
-              setIsUploadedPageActive(false);
-            }}
+    <>
+      {uploadedImage && (
+        <Container onClick={onModalCLose}>
+          <Dialogue
+            onClick={(evt: SyntheticEvent<HTMLDivElement>): void => evt.stopPropagation()}
           >
-            Upload
-          </Button>
-        }
-        <Button
-          variant='secondary'
-          onClick={onModalCLose}
-        >
-          Cancel
-        </Button>
-      </Footer>
-      </Dialogue>
-    </Container>
+            <Image src={uploadedImage} alt={'preview'} id='img' ref={imageRef} />
+          <Footer>
+            {<Button
+                onClick={(): void => {
+                  setIsUploadStarted(true);
+                  setIsOpenModal(false);
+                  onUpload();
+                  setIsUploadedPageActive(false);
+                }}
+              >
+                Upload
+              </Button>
+            }
+            <Button
+              variant='secondary'
+              onClick={onModalCLose}
+            >
+              Cancel
+            </Button>
+          </Footer>
+          </Dialogue>
+        </Container>
+      )}
+    </>
   );
 };

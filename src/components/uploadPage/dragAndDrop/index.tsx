@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 
 import { AppContext } from '../../../context/app-provider';
+import { eventTypes } from '../../../helpers/constants';
 import { validateFiles } from '../../../helpers/utils';
 import { Error } from '../../shared/error';
 import { Container, Form, Input, Label, UploadButton } from './styles';
@@ -11,6 +12,7 @@ const getUploadedImagePath = (
   uploadedImage?: File): void => {
   if (uploadedImage) {
     const reader = new FileReader();
+
     reader.onloadend = () => {
       setUploadedImage(reader.result as string); //!!TODO
       setIsOpenModal(true);
@@ -30,9 +32,9 @@ export const DragAndDrop = (): JSX.Element => {
   const onDrag = (evt: React.DragEvent<HTMLFormElement>): void => {
     evt.preventDefault();
 
-    if (evt.type === 'dragenter' || evt.type === 'dragover') {
+    if (evt.type === eventTypes.dragEnter || evt.type === eventTypes.dragOver) {
       setDragActive(true);
-    } else if (evt.type === 'dragleave') {
+    } else if (evt.type === eventTypes.dragLeave) {
       setDragActive(false);
     }
   };
@@ -45,14 +47,9 @@ export const DragAndDrop = (): JSX.Element => {
     setDragActive(false);
     setValidationError('');
 
-    const validation = validateFiles(file);
-
-      if (!validation) {
-        getUploadedImagePath(setUploadedImage, setIsOpenModal, file);
-      } else {
-        setValidationError(validation);
-        setIsOpenModal(true);
-      }
+    if (file) {
+      getData(file);
+    }
   };
 
   const onChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
@@ -63,20 +60,24 @@ export const DragAndDrop = (): JSX.Element => {
     setValidationError('');
 
     if (file) {
-      const validation = validateFiles(file);
-
-      if (!validation) {
-        getUploadedImagePath(setUploadedImage, setIsOpenModal, file);
-      } else {
-        setValidationError(validation);
-        setIsOpenModal(true);
-      }
+      getData(file);
     }
   };
 
   const onButtonClick = (): void => {
     if (inputRef.current) {
       inputRef.current.click();
+    }
+  };
+
+  const getData = (file: File): void => {
+    const validation = validateFiles(file);
+
+    if (!validation) {
+      getUploadedImagePath(setUploadedImage, setIsOpenModal, file);
+    } else {
+      setValidationError(validation);
+      setIsOpenModal(true);
     }
   };
 
@@ -109,8 +110,7 @@ export const DragAndDrop = (): JSX.Element => {
         <Error type='validationError'>
           {validationError}
         </Error>
-      )
-        }
+      )}
     </Container>
   );
 };

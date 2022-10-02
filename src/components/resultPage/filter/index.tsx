@@ -4,16 +4,14 @@ import { RadioButton } from '../../shared/radioButton';
 import { Prediction } from '../../../types';
 import { Container } from './styles';
 
-interface Props {
-  predictions: Prediction[];
-  activeFilterIndex: number;
-  setActiveFilterIndex: (a: number) => void;
-  onFilterChange: (index: number) => void;
-}
+interface Properties {
+  predictions: Prediction[],
+  activeFilterIndex: number,
+  setActiveFilterIndex: (a: number) => void,
+  onFilterChange: (index: number) => void,
+};
 
-export const Filter: FC<Props> = ({ predictions, activeFilterIndex, onFilterChange }): JSX.Element => {
-
- return (
+export const Filter: FC<Properties> = ({ predictions, activeFilterIndex, onFilterChange }): JSX.Element => (
   <Container>
     <p>
       We think it's:
@@ -30,5 +28,4 @@ export const Filter: FC<Props> = ({ predictions, activeFilterIndex, onFilterChan
       </RadioButton>
     ))}
   </Container>
- );
-};
+);

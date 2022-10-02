@@ -13,9 +13,7 @@ import { Prediction } from '../../types';
 
 const getBreedPrediction = async (img: HTMLImageElement): Promise<Prediction[]> => {
   const model = await mobilenet.load();
-
   const predictions = await model.classify(img);
-  console.log('predictions: ', predictions);
 
   return predictions;
 };
@@ -41,35 +39,29 @@ export const UploadPage = (): JSX.Element | null => {
       const urls = getUrlsFromPredictions(predictions);
       setUrls(urls);
 
-      const currentUrl = urls[activeFilterIndex].toLowerCase()
+      const currentUrl = urls[activeFilterIndex].toLowerCase();
 
-      await getPictures(
-        {
-          url: currentUrl,
-          onSuccess: (data: AxiosResponse<{message: string[]}>['data']) => {
-            setIsUploadStarted(false);
-            setPicturesList(() => data.message);
-          },
-          onError: (error) => {
-            if (error.response?.status === 404) {
-              // setError(error.response.data.message);
-              setError(error.message);
-            }
-          },
-          onFinally: () => {
-            setIsUploadStarted(false);
-          },
-        }
-      )
+      await getPictures({
+        url: currentUrl,
+        onSuccess: (data: AxiosResponse<{message: string[]}>['data']) => {
+          setPicturesList(() => data.message);
+        },
+        setError,
+        onFinally: () => {
+          setIsUploadStarted(false);
+        },
+      });
     }
-  }
-
-  if (!isUploadedPageActive) return null;
+  };
 
   return (
     <>
-      <DragAndDrop />
-      {isOpenModal && <PreviewModal onUpload={onUpload} />}
+      {isUploadedPageActive && (
+        <>
+          <DragAndDrop />
+          {isOpenModal && <PreviewModal onUpload={onUpload} />}
+        </>
+      )}
     </>
   );
 };
