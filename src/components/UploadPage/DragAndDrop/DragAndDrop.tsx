@@ -43,7 +43,7 @@ export const DragAndDrop: FC<DragAndDropProps> = ({ openModal }): JSX.Element =>
     }
   };
 
-  const onChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
+  const onChange = async (evt: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
     evt.preventDefault();
 
     const file = evt.target.files?.[0];
@@ -51,7 +51,8 @@ export const DragAndDrop: FC<DragAndDropProps> = ({ openModal }): JSX.Element =>
     setValidationError(null);
 
     if (file) {
-      getData(file);
+      await getData(file);
+      evt.target.value = '';
     }
   };
 
@@ -60,8 +61,6 @@ export const DragAndDrop: FC<DragAndDropProps> = ({ openModal }): JSX.Element =>
       inputRef.current.click();
     }
   };
-
-  const onSubmit = (evt: React.FormEvent): void => evt.preventDefault();
 
   const getData = (file: File): void => {
     const validation = validateFiles(file);
@@ -82,7 +81,6 @@ export const DragAndDrop: FC<DragAndDropProps> = ({ openModal }): JSX.Element =>
         onDragLeave={onDrag}
         onDragOver={onDrag}
         onDrop={onDrop}
-        onSubmit={onSubmit}
       >
         <Input
           id="input-file-upload"
