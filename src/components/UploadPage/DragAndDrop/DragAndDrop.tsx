@@ -57,7 +57,9 @@ export const DragAndDrop: FC<DragAndDropProps> = ({ openModal }): JSX.Element =>
     }
   };
 
-  const onButtonClick = (): void => {
+  const onButtonClick = (evt: React.MouseEvent<HTMLElement>): void => {
+    evt.preventDefault();
+
     if (inputRef.current) {
       inputRef.current.click();
     }
