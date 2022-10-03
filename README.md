@@ -14,7 +14,6 @@
 - [x] The app should classify a dog present in the image based on its breed and display the result
 - [x] The app should showcase pictures of dogs of the same breed in a gallery below
 - [x] The gallery should take all the available screen space and consist of lazy-loaded images
-- [x] The user should be able to mark a task completed
 - [x] The images that don’t fit the current screen should be accessible with an “infinite scroll”-approach.
 
 As a bonus :
